@@ -51,7 +51,9 @@ def format_wp_insert(doc):
         return None
     data.write(encoded)
 
-    return data
+    request_id, final_message = _insert_message(data.getvalue())
+    print "sending this data " + final_message
+    return final_message
 
 def doc_from_message(message):
     doc = {}
@@ -70,6 +72,6 @@ def send(message, port):
     if not wp:
         print "boo there was a problem"
         return
-    send_over_udp(wp.getvalue())
+    send_over_udp(wp)
 
 send("hello python", 26000)
